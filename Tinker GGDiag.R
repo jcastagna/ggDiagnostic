@@ -6,6 +6,7 @@ library(broom)
 
 lm.1 <- lm(mpg ~ wt,data=mtcars)
 
+########
 lm.1
 par(mfrow=c(2,3)) 
 plot(lm.1) 
@@ -35,6 +36,20 @@ D1  <- augment(My.Mod) %>%
 
 D1
 
+# geom_text(aes(label=ifelse((x>4*IQR(x)|y>4*IQR(y)),label,"")), hjust=1.1)
+D1 +geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),
+                               .rownames,"")),
+              hjust=-0.1,vjust=-0.1,size=2.5)
+
+D1 +geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),
+                               .rownames,"")),
+              hjust=-0.1,vjust=-0.1,size=2.5)
+
+
+D1 +geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)|
+                                  .fitted>abs(4*IQR(.fitted))),
+                               .rownames,"")),
+              hjust=-0.1,vjust=-0.1,size=2.5)
 
 #################
 # Normal QQ
@@ -81,6 +96,10 @@ D3 + geom_text(aes(label=.rownames), colour="blue")
 library(ggrepel)
 
 D3 + geom_text_repel(aes(label = .rownames))
+
+D3 + geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),
+                           .rownames,"")),
+          hjust=-0.1,vjust=-0.1,size=2.5)
 
 #######
 #Cooks Distane
