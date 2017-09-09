@@ -65,7 +65,8 @@ plot(My.Mod,which=3)
 D3  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted, y=sqrt(.std.resid))) +
   geom_point()+
-  labs(title="Scale Location",subtitle=My.Mod$call)
+  labs(title="Scale Location",subtitle=My.Mod$call) +
+  geom_smooth(se=FALSE,colour="red",size=.25) 
 
 
 D3
@@ -83,12 +84,49 @@ D3 + geom_text_repel(aes(label = .rownames))
 
 #######
 #Cooks Distane
+
 plot(My.Mod,which=4)
 
 D4 <- augment(My.Mod) %>% 
-  ggplot(aes(x=1:32, y=.cooksd)) +
-  geom_point() +
+  ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
+  geom_point(size = .75) +
   geom_col(width = .1) +
   labs(title="Cooks Dist",subtitle=My.Mod$call)
 
 D4
+
+
+############
+
+plot(My.Mod,which=5)
+head(Tidy.Mod)
+tidy(My.Mod)
+lev = hat(model.matrix(My.Mod))
+
+D5 <- augment(My.Mod) %>% 
+  ggplot(aes(x=.hat, y=.std.resid)) +
+  geom_point() +
+  geom_hline(yintercept=0,linetype=3) +
+  labs(title="Resid vs Leverage",subtitle=My.Mod$call)
+
+D5
+
+######
+plot(My.Mod,which=6)
+
+D6 <- augment(My.Mod) %>% 
+  ggplot(aes(x=.hat, y=.cooksd)) +
+  geom_point() +
+  labs(title="CooksD vs Leverage",subtitle=My.Mod$call) 
+
+D6
+
+
+###
+#Panel
+
+#grid extra
+library(gridExtra)
+grid.arrange(D1, D2, D3, D4, D5, D6, ncol=2)
+
+plot(My.Mod,which=)

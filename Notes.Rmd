@@ -1,8 +1,9 @@
 ---
 title: "Notes"
 author: "JC"
-date: "9/8/2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=TRUE,echo=FALSE}
@@ -18,7 +19,7 @@ Quick & Dirty model diagnostic plots in ggplot.
 
 ## Plan
 
-1. Redo base plots in ggplot
+*1. Redo base plots in ggplot*
 
 ```{r, fig.align='center'}
 par(mfrow=c(2,3))
@@ -27,7 +28,7 @@ plot(lm.1,which=1:6)
 
 ```
 
-2. Create ggplot versions ~ make tidy
+*2. Create ggplot versions ~ make tidy*
 
 ```{r Diag1, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
 library(tidyverse)
@@ -48,12 +49,12 @@ D1  <- augment(My.Mod) %>% ggplot(aes(x=.fitted,y=.std.resid)) +
 D1
 ```
 
-```{r ,ref.label=c("Diag1"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=4,fig.width=4.5 }
+```{r ,ref.label=c("Diag1"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5 }
 
 ```
 
 
-3. Functionalise
+*3. Functionalise*
 
 How to determine models?  
 What sort of arguments, functionality?  
@@ -76,10 +77,10 @@ Data %>% MyModel %>% ggdiag(Plot=c("RVFit","qq"))
 ```
 
 
-4. Ensure plays nice with existing
+*4. Ensure plays nice with existing*
 
 
-x. Other Thoughts  
+*x. Other Thoughts  *
 Practice with RProj, Git.  
 Don't re-invent the wheel - just make quicker to change the flat.
 
@@ -94,5 +95,6 @@ Starting assumptiom? Start from a) model (eg lm) or b) tidy output of model
 # This doesnt help
 plot
 ```
+
 
 
