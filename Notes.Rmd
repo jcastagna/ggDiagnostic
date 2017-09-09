@@ -86,7 +86,7 @@ Don't re-invent the wheel - just make quicker to change the flat.
 
 ## Questions ???  
 Logic for text annotation? How determine cutoff.
-
+Starting assumptiom? Start from a) model (eg lm) or b) tidy output of model
 
   
 ```{r}
@@ -94,4 +94,5 @@ Logic for text annotation? How determine cutoff.
 # This doesnt help
 plot
 ```
+
 
