@@ -168,7 +168,10 @@ D4 <- augment(My.Mod) %>%
   ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
   geom_point(size = .75) +
   geom_col(width = .1) +
-  labs(title="Cooks Dist",subtitle=My.Mod$call)
+  geom_hline(yintercept=.2,linetype=4,colour="orange") +
+  labs(title="Cooks Dist",subtitle=My.Mod$call) +
+  geom_text(aes(label=ifelse((.cooksd>.2),.rownames,"")),
+              hjust=-0.1,vjust=-0.1,size=2.5)
 
 D4
 ```
@@ -177,6 +180,7 @@ D4
 
 ```
 
+\newpage
 # Plot5: Resid vs Leverage
 
 ```{r D5, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE }

@@ -115,6 +115,10 @@ D4 <- augment(My.Mod) %>%
 D4
 
 
+D4 +geom_text(aes(label=ifelse((.cooksd>.2),.rownames,"")),
+              hjust=-0.1,vjust=-0.1,size=2.5)
+
+
 ############
 
 plot(My.Mod,which=5)

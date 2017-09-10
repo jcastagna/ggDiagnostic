@@ -87,7 +87,8 @@ Don't re-invent the wheel - just make quicker to change the flat.
 
 ## Questions ???  
 Logic for text annotation? How determine cutoff.
-Starting assumptiom? Start from a) model (eg lm) or b) tidy output of model
+Starting assumptiom? Start from a) model (eg lm) or b) tidy output of model  
+What are the statistics that determine highlighting text labels in base plots? 
 
   
 ```{r}
