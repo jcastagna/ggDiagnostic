@@ -5,19 +5,24 @@ library(tidyverse)
 library(broom)
 
 lm.1 <- lm(mpg ~ wt,data=mtcars)
+glm.1 <- glm(vs ~ wt, family = binomial, data = mtcars)
 
 ########
-lm.1
-par(mfrow=c(2,3)) 
-plot(lm.1) 
-par(mfrow=c(1,1)) 
+
+
+#par(mfrow=c(2,3)) 
+#plot(lm.1) 
+#par(mfrow=c(1,1)) 
+
 #resid vs fitt
 tidy(lm.1)
 glance(lm.1)
 augment(lm.1)
 
 ############
+My.Mod <- glm.1
 My.Mod <- lm.1
+
 Tidy.Mod <- augment(My.Mod)
 
 class(My.Mod)
@@ -32,6 +37,8 @@ D1  <- augment(My.Mod) %>%
   geom_point() +
   geom_smooth(se=FALSE,colour="red",size=.25) +
   geom_hline(yintercept=0,linetype=3) +
+  geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),.rownames,"")),
+             hjust=-0.1,vjust=-0.1,size=2.5) +
   labs(title="Residuls vs Fitted",subtitle=My.Mod$call)
 
 D1
@@ -78,7 +85,7 @@ summary(sqrt(Tidy.Mod$.std.resid))
 plot(My.Mod,which=3)
 
 D3  <- augment(My.Mod) %>% 
-  ggplot(aes(x=.fitted, y=sqrt(.std.resid))) +
+  ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
   geom_point()+
   labs(title="Scale Location",subtitle=My.Mod$call) +
   geom_smooth(se=FALSE,colour="red",size=.25) 
@@ -110,13 +117,17 @@ D4 <- augment(My.Mod) %>%
   ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
   geom_point(size = .75) +
   geom_col(width = .1) +
-  labs(title="Cooks Dist",subtitle=My.Mod$call)
+  labs(title="Cooks Dist",subtitle=My.Mod$call)+
+  geom_text(aes(label=ifelse((.cooksd>.2),.rownames,"")),
+             hjust=-0.1,vjust=-0.1,size=2.5) +
+  geom_hline(yintercept=.2,linetype=4,colour="orange")
 
 D4
 
 
 D4 +geom_text(aes(label=ifelse((.cooksd>.2),.rownames,"")),
-              hjust=-0.1,vjust=-0.1,size=2.5)
+              hjust=-0.1,vjust=-0.1,size=2.5) +
+  geom_hline(yintercept=.2,linetype=4,colour="orange")
 
 
 ############
@@ -153,3 +164,4 @@ library(gridExtra)
 grid.arrange(D1, D2, D3, D4, D5, D6, ncol=2)
 
 plot(My.Mod,which=)
+

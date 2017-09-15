@@ -72,6 +72,7 @@ D2  <- augment(My.Mod) %>%
   ggplot(aes(sample=.fitted)) +
   stat_qq() +
   labs(title="Normal QQ",subtitle=My.Mod$call)
+  
 
 D2 
 
@@ -87,7 +88,7 @@ D2
 plot(My.Mod,which=3)
 
 D3  <- augment(My.Mod) %>% 
-  ggplot(aes(x=.fitted, y=sqrt(.std.resid))) +
+  ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
   geom_point()+
   labs(title="Scale Location",subtitle=My.Mod$call) + 
   geom_smooth(se=FALSE,colour="red",size=.25) 
