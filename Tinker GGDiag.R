@@ -177,3 +177,47 @@ grid.arrange(D1, D2, D3, D4, D5, D6, ncol=2)
 
 plot(My.Mod,which=)
 
+
+################################
+#Example test
+
+
+##################
+
+#ifelse(class(My.Mod)=="lm",
+#       print("It's a lm object, using broom then ggplot"),
+#       ifelse(class(My.Mod)=="glm",
+#       print("its glm"),
+#       print("Unsure of modeltype object - so trying my best")))
+
+
+
+# broke why token?
+
+#if class(My.Mod)=="lm" {
+#  print("It's an lm object, using broom then ggplot")
+#} else if class(My.Mod)=="glm" {
+#  print("It's an lm object, using broom then ggplot")
+#} else {
+#  print("Its not an lm/glm object - so trying my best")
+#}
+
+
+
+#plot(My.Mod,which=1)
+
+
+D1  = augment(My.Mod) %>% 
+  ggplot(aes(x=.fitted,y=.std.resid)) +
+  geom_point() +
+  geom_smooth(se=FALSE,colour="red",size=.25) +
+  geom_hline(yintercept=0,linetype=3) +
+  labs(title="Residuls vs Fitted",subtitle=My.Mod$call)
+
+
+###
+
+D1
+
+
+
