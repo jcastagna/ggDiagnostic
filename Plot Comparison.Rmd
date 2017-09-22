@@ -51,7 +51,9 @@ D1  <- augment(My.Mod) %>%
   ggplot(aes(x=.fitted,y=.std.resid)) +
   geom_point() +
   geom_smooth(se=FALSE,colour="red",size=.25) +
-  geom_hline(yintercept=0,linetype=3) +
+  geom_hline(yintercept=0,linetype=3,colour="blue") +
+  geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),.rownames,"")),
+             hjust=-0.1,vjust=-0.1,size=2.5) +
   labs(title="Residuls vs Fitted",subtitle=My.Mod$call)
 
 D1

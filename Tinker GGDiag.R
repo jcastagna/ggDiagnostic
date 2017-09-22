@@ -32,15 +32,18 @@ attributes(My.Mod)
 # Res v Fitt
 plot(My.Mod,which=1)
 
+My.Method="auto"
+
 D1  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted,y=.std.resid)) +
   geom_point() +
-  geom_smooth(se=FALSE,colour="red",size=.25) +
-  geom_hline(yintercept=0,linetype=3) +
+  geom_smooth(method=My.Method,se=FALSE,colour="red",size=.25) +
+  geom_hline(yintercept=0,linetype=4) +
   geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),.rownames,"")),
              hjust=-0.1,vjust=-0.1,size=2.5) +
   labs(title="Residuls vs Fitted",subtitle=My.Mod$call)
-
+#My.Mod$call
+#glue("Model is {My.Mod$call} ")
 D1
 
 # geom_text(aes(label=ifelse((x>4*IQR(x)|y>4*IQR(y)),label,"")), hjust=1.1)
@@ -72,10 +75,19 @@ D2  <- augment(My.Mod) %>%
 
 D2 
 
-D2 + geom_abline(intercept = 10, slope = 2,colour="red")
+D2 + geom_abline(intercept = 20, slope = 37.285/5.344,colour="red")
 D2 + geom_abline(intercept = -5.344 , slope = 37.285,colour="red")
 
-D2 + geom_smooth( se = FALSE)
+D2 + geom_smooth(aes(x=sample,y=1))
+
+####
+y     <- quantile(My.Mod, c(0.25, 0.75)) # Find the 1st and 3rd quartiles
+x     <- qnorm( c(0.25, 0.75))         # Find the matching normal values on the x-axis
+slope <- diff(y) / diff(x)             # Compute the line slope
+int   <- y[1] - slope * x[1]           # Compute the line intercept
+
+D2 
+
 
 ################
 #Scale Location
