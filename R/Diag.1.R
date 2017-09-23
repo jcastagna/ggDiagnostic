@@ -1,5 +1,5 @@
 
-#' Diagnostic ggplots for models
+#' Standardised Residules v Fitted - Diagnostic ggplots for models
 #' 
 #' 
 #' Quick Model Diagnostics in GGplot.
@@ -15,22 +15,23 @@
 #' 
 #' @examples
 #' 
-#' Test models
+#' ### Standardised Residules v Fitted
+#' # Test models
 #'
 #' lm.1 <- lm(mpg ~ wt,data=mtcars)
 #' glm.1 <- glm(formula= vs ~ wt + disp, data=mtcars, family=binomial)
 #'
-#' Example as function
+#' # Example as function
 #' Diag.1(lm.1)
 #' Diag.1(glm.1)
 #'
-#' Example with magrittr pipe
+#' # Example with magrittr pipe
 #' lm.1 %>% Diag.1()
 #' glm.1 %>% Diag.1()
 #' 
-#' Output shoud be a ggplot object in form of diagnostic plot.
+#' # Output shoud be a ggplot object in form of diagnostic plot.
 #' 
-#' Coresponding Base example
+#' # Coresponding Base example
 #' plot(lm.1, which=1)
 #' plot(glm.1, which=1)
 #' 
