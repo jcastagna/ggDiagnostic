@@ -3,3 +3,4 @@
 export(Diag.1)
 export(Diag.2)
 export(Diag.3)
+export(Diag.4)

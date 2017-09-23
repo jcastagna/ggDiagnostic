@@ -19,7 +19,7 @@ class(My.Mod)
 attributes(My.Mod)
 head(Tidy.Mod,4)
 
-## ----D1, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
+## ----D1, echo=TRUE, collapse=TRUE,fig.align='center',eval=FALSE----------
 #  
 #  # base diagnostic
 #  plot(My.Mod,which=1)
@@ -36,7 +36,7 @@ head(Tidy.Mod,4)
 #  
 #  D1
 
-## ----ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='center', fig.height=3.5,fig.width=3.5,fig.show='hold'----
+## ----ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='center', fig.height=3,fig.width=3,fig.show='hold'----
 
 # base diagnostic
 plot(My.Mod,which=1)

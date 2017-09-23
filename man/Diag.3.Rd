@@ -19,8 +19,8 @@ Using the Base version diagnostic plots as a template.
 }
 \examples{
 
-# Test models
 # Scale Location
+# Test models
 
 lm.1 <- lm(mpg ~ wt,data=mtcars)
 glm.1 <- glm(formula= vs ~ wt + disp, data=mtcars, family=binomial)

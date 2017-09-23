@@ -2,7 +2,7 @@
 % Please edit documentation in R/Diag.2.R
 \name{Diag.2}
 \alias{Diag.2}
-\title{Diagnostic ggplots for models}
+\title{Normal QQ  - Diagnostic ggplots for models}
 \usage{
 Diag.2(My.Model)
 }
@@ -19,23 +19,23 @@ Using the Base version diagnostic plots as a template.
 }
 \examples{
 
-Test models
-Normal QQ
+### Normal QQ 
+# Test models
 
 lm.1 <- lm(mpg ~ wt,data=mtcars)
 glm.1 <- glm(formula= vs ~ wt + disp, data=mtcars, family=binomial)
 
-Example as function()
+# Example as function()
 Diag.2(lm.1)
 Diag.2(glm.1)
 
-Example with magrittr pipe
+# Example with magrittr pipe
 lm.1 \%>\% Diag.2()
 glm.1 \%>\% Diag.2()
 
-Output shoud be a ggplot object in form of diagnostic plot.
+# Output shoud be a ggplot object in form of diagnostic plot.
 
-Coresponding Base example
+# Coresponding Base example
 plot(lm.1, which=2)
 plot(glm.1, which=2)
 
