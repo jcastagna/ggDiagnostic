@@ -1,8 +1,9 @@
 
 #' Diagnostic ggplots for models
-#' Standardised Residules v Fitted Values
+#' 
 #' 
 #' Quick Model Diagnostics in GGplot.
+#' Standardised Residules v Fitted Values
 #' Using the Base version diagnostic plots as a template.
 #' 
 #' @param My.Model A model in a list format. eg lm or glm

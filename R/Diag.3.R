@@ -1,9 +1,9 @@
 
-#' Diagnostic ggplots for models
+#' Scale Location - Diagnostic ggplot for models
 #'
 #'
 #' Quick Model Diagnostics in GGplot.
-#' Normal QQ
+#' Scale Location
 #' Using the Base version diagnostic plots as a template.
 #' 
 #' @param My.Model A model in a list format. eg lm or glm
@@ -15,33 +15,31 @@
 #' 
 #' @examples
 #' 
-#' Test models
-#' Normal QQ
+#' # Test models
+#' # Scale Location
 #'
 #' lm.1 <- lm(mpg ~ wt,data=mtcars)
 #' glm.1 <- glm(formula= vs ~ wt + disp, data=mtcars, family=binomial)
 #'
-#' Example as function()
-#' Diag.2(lm.1)
-#' Diag.2(glm.1)
+#' # Example as function()
+#' Diag.3(lm.1)
+#' Diag.3(glm.1)
 #'
-#' Example with magrittr pipe
-#' lm.1 %>% Diag.2()
-#' glm.1 %>% Diag.2()
+#' # Example with magrittr pipe
+#' lm.1 %>% Diag.3()
+#' glm.1 %>% Diag.3()
 #' 
-#' Output shoud be a ggplot object in form of diagnostic plot.
+#' # Output shoud be a ggplot object in form of diagnostic plot.
 #' 
-#' Coresponding Base example
-#' plot(lm.1, which=2)
-#' plot(glm.1, which=2)
+#' # Coresponding Base example
+#' plot(lm.1, which=3)
+#' plot(glm.1, which=3)
 #' 
-#' 
-
 #' 
 #' @export
 #' 
 
-Diag.2 <- function(My.Model){
+Diag.3 <- function(My.Model){
   
 My.Mod=My.Model
 
@@ -50,12 +48,13 @@ print("Attempting to use broom then ggplot on model")
 # suppressWarnings()
 D.0  <- broom::augment(My.Mod)
 
-D.2 <- D.0 %>% 
-  ggplot(aes(sample=.fitted)) +
-  stat_qq() +
-  labs(title="Normal QQ",subtitle=My.Mod$call)
+D.3 <- D.0 %>% 
+  ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
+  geom_point() +
+  geom_smooth(se=FALSE,colour="red",size=.25) +
+  labs(title="Scale Location",subtitle=My.Mod$call)
   
-return(D.2)
+return(D.3)
 
 }
 

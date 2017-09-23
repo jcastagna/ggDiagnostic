@@ -2,8 +2,7 @@
 % Please edit documentation in R/Diag.1.R
 \name{Diag.1}
 \alias{Diag.1}
-\title{Diagnostic ggplots for models
-Standardised Residules v Fitted Values}
+\title{Diagnostic ggplots for models}
 \usage{
 Diag.1(My.Model)
 }
@@ -15,6 +14,7 @@ A ggplot object; a diagnostic plot (modeled on the base version)
 }
 \description{
 Quick Model Diagnostics in GGplot.
+Standardised Residules v Fitted Values
 Using the Base version diagnostic plots as a template.
 }
 \examples{
