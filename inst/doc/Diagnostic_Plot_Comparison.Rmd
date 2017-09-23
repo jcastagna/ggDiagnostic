@@ -15,7 +15,14 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE,warnings=FALSE,me
 
 
 ## Note
-Plot Comparison based on plan.
+
+Diagnostic plot comparisons from base and this package.
+
+Some notes on plot comparisons.
+axis scale/ aspect slightly different 
+Text annotations logic ~ highlighting
+"Wigglyness" of line different ~ slightly different parameter used.
+
 
 Data & Libs
 ```{r Libs}
@@ -37,18 +44,16 @@ attributes(My.Mod)
 head(Tidy.Mod,4)
 ```
 
-Notes
-axis scale/ aspect slightly different 
-Text annotations logic ~ highlighting
-"Wigglyness" of line different ~ slightly diff parameter?
 
 \newpage
 ## Plot1: Residules v Fitted
 
 ```{r D1, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
 
+# base diagnostic
 plot(My.Mod,which=1)
 
+# ggDiagnostic plot
 D1  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted,y=.std.resid)) +
   geom_point() +
@@ -61,7 +66,7 @@ D1  <- augment(My.Mod) %>%
 D1
 ```
 
-```{r ,ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5 }
+```{r ,ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='center', fig.height=3.5,fig.width=3.5,fig.show='hold' }
 
 ```
 
@@ -70,8 +75,10 @@ D1
  
 ```{r D2, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
 
+# base diagnostic
 plot(My.Mod,which=2)
 
+# ggDiagnostic plot
 D2  <- augment(My.Mod) %>% 
   ggplot(aes(sample=.fitted)) +
   stat_qq() +
@@ -89,8 +96,10 @@ D2
 \newpage
 ## Plot3: Scale Location
 ```{r D3, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
+# base diagnostic
 plot(My.Mod,which=3)
 
+# ggDiagnostic plot
 D3  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
   geom_point()+
@@ -100,75 +109,23 @@ D3  <- augment(My.Mod) %>%
 D3
 
 
-
 ```
 
 ```{r ,ref.label=c("D3"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5 }
 
 ```
 
-Questions...  
 
-Missing Values? Why?   
-Line wigliness.What parameters?
-
-
-\newpage
-Missing Values
-
-```{r fig.height=3.0,fig.width=3.0}
-# Raw
-Tidy.Mod$.std.resid
-
-# Why so many NAN's?
-sqrt(Tidy.Mod$.std.resid)
-
-#Try Abs value
-sqrt(abs(Tidy.Mod$.std.resid))
-
-D3abs <- augment(My.Mod) %>% 
-  ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
-  geom_point()+
-  labs(title="Test SL with abs value",subtitle=My.Mod$call) + 
-  geom_smooth(se=FALSE,colour="red",size=.25) 
-
-D3abs
-
-
-```
-
-\newpage
-with text labels added
-
-```{r D3b, echo=TRUE, collapse=TRUE,fig.align='default',eval=TRUE, fig.height=6,fig.width=8}
-## text?
-D3c <- D3 + geom_text(aes(label=.rownames),
-               nudge_x = 1, nudge_y = .1, 
-               colour="blue")
-
-# extra txt library
-library(ggrepel) 
-
-D3d <- D3 + geom_text_repel(aes(label = .rownames))
-
-D3e <- D3 + geom_text(aes(label=ifelse(
-  (.std.resid>1*IQR(.std.resid)),.rownames,"")),
-          hjust=-0.1,vjust=-0.1,size=2.5)
-
-#grid extra
-grid.arrange(D3c, D3d, D3e, ncol=2)
-
-
-
-```
 
 \newpage
 
 ## Plot4: Cooks Distance
 ```{r D4, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
-#Cooks Distane
+# Cooks Distance
+# base diagnostic
 plot(My.Mod,which=4)
 
+# ggDiagnostic plot
 D4 <- augment(My.Mod) %>% 
   ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
   geom_point(size = .75) +
@@ -191,8 +148,11 @@ D4
 ```{r D5, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE }
 
 # Resid vs Leverage
+
+# base diagnostic
 plot(My.Mod,which=5)
 
+# ggDiagnostic plot
 D5 <- augment(My.Mod) %>% 
   ggplot(aes(x=.hat, y=.std.resid)) +
   geom_point(size=.75) +
@@ -211,8 +171,10 @@ D5
 # Plot6: CooksSD vs Leverage
 
 ```{r D6, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE}
+# base diagnostic
 plot(My.Mod,which=6)
 
+# ggDiagnostic plot
 D6 <- augment(My.Mod) %>% 
   ggplot(aes(x=.hat, y=.cooksd)) +
   geom_point() +

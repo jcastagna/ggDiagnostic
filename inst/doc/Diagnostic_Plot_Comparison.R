@@ -21,8 +21,10 @@ head(Tidy.Mod,4)
 
 ## ----D1, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
 #  
+#  # base diagnostic
 #  plot(My.Mod,which=1)
 #  
+#  # ggDiagnostic plot
 #  D1  <- augment(My.Mod) %>%
 #    ggplot(aes(x=.fitted,y=.std.resid)) +
 #    geom_point() +
@@ -34,10 +36,12 @@ head(Tidy.Mod,4)
 #  
 #  D1
 
-## ----ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
+## ----ref.label=c("D1"),eval=TRUE,echo=FALSE, fig.align='center', fig.height=3.5,fig.width=3.5,fig.show='hold'----
 
+# base diagnostic
 plot(My.Mod,which=1)
 
+# ggDiagnostic plot
 D1  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted,y=.std.resid)) +
   geom_point() +
@@ -51,8 +55,10 @@ D1
 
 ## ----D2, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
 #  
+#  # base diagnostic
 #  plot(My.Mod,which=2)
 #  
+#  # ggDiagnostic plot
 #  D2  <- augment(My.Mod) %>%
 #    ggplot(aes(sample=.fitted)) +
 #    stat_qq() +
@@ -64,8 +70,10 @@ D1
 
 ## ----ref.label=c("D2"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
 
+# base diagnostic
 plot(My.Mod,which=2)
 
+# ggDiagnostic plot
 D2  <- augment(My.Mod) %>% 
   ggplot(aes(sample=.fitted)) +
   stat_qq() +
@@ -76,8 +84,10 @@ D2
 
 
 ## ----D3, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
+#  # base diagnostic
 #  plot(My.Mod,which=3)
 #  
+#  # ggDiagnostic plot
 #  D3  <- augment(My.Mod) %>%
 #    ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
 #    geom_point()+
@@ -87,11 +97,12 @@ D2
 #  D3
 #  
 #  
-#  
 
 ## ----ref.label=c("D3"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
+# base diagnostic
 plot(My.Mod,which=3)
 
+# ggDiagnostic plot
 D3  <- augment(My.Mod) %>% 
   ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
   geom_point()+
@@ -102,52 +113,12 @@ D3
 
 
 
-
-## ----fig.height=3.0,fig.width=3.0----------------------------------------
-# Raw
-Tidy.Mod$.std.resid
-
-# Why so many NAN's?
-sqrt(Tidy.Mod$.std.resid)
-
-#Try Abs value
-sqrt(abs(Tidy.Mod$.std.resid))
-
-D3abs <- augment(My.Mod) %>% 
-  ggplot(aes(x=.fitted, y=sqrt(abs(.std.resid)))) +
-  geom_point()+
-  labs(title="Test SL with abs value",subtitle=My.Mod$call) + 
-  geom_smooth(se=FALSE,colour="red",size=.25) 
-
-D3abs
-
-
-
-## ----D3b, echo=TRUE, collapse=TRUE,fig.align='default',eval=TRUE, fig.height=6,fig.width=8----
-## text?
-D3c <- D3 + geom_text(aes(label=.rownames),
-               nudge_x = 1, nudge_y = .1, 
-               colour="blue")
-
-# extra txt library
-library(ggrepel) 
-
-D3d <- D3 + geom_text_repel(aes(label = .rownames))
-
-D3e <- D3 + geom_text(aes(label=ifelse(
-  (.std.resid>1*IQR(.std.resid)),.rownames,"")),
-          hjust=-0.1,vjust=-0.1,size=2.5)
-
-#grid extra
-grid.arrange(D3c, D3d, D3e, ncol=2)
-
-
-
-
 ## ----D4, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
-#  #Cooks Distane
+#  # Cooks Distance
+#  # base diagnostic
 #  plot(My.Mod,which=4)
 #  
+#  # ggDiagnostic plot
 #  D4 <- augment(My.Mod) %>%
 #    ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
 #    geom_point(size = .75) +
@@ -160,9 +131,11 @@ grid.arrange(D3c, D3d, D3e, ncol=2)
 #  D4
 
 ## ----ref.label=c("D4"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
-#Cooks Distane
+# Cooks Distance
+# base diagnostic
 plot(My.Mod,which=4)
 
+# ggDiagnostic plot
 D4 <- augment(My.Mod) %>% 
   ggplot(aes(x=seq_along(.cooksd), y=.cooksd)) +
   geom_point(size = .75) +
@@ -177,8 +150,11 @@ D4
 ## ----D5, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
 #  
 #  # Resid vs Leverage
+#  
+#  # base diagnostic
 #  plot(My.Mod,which=5)
 #  
+#  # ggDiagnostic plot
 #  D5 <- augment(My.Mod) %>%
 #    ggplot(aes(x=.hat, y=.std.resid)) +
 #    geom_point(size=.75) +
@@ -191,8 +167,11 @@ D4
 ## ----ref.label=c("D5"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
 
 # Resid vs Leverage
+
+# base diagnostic
 plot(My.Mod,which=5)
 
+# ggDiagnostic plot
 D5 <- augment(My.Mod) %>% 
   ggplot(aes(x=.hat, y=.std.resid)) +
   geom_point(size=.75) +
@@ -203,8 +182,10 @@ D5
 
 
 ## ----D6, echo=TRUE, collapse=TRUE,fig.align='default',eval=FALSE---------
+#  # base diagnostic
 #  plot(My.Mod,which=6)
 #  
+#  # ggDiagnostic plot
 #  D6 <- augment(My.Mod) %>%
 #    ggplot(aes(x=.hat, y=.cooksd)) +
 #    geom_point() +
@@ -213,8 +194,10 @@ D5
 #  D6
 
 ## ----ref.label=c("D6"),eval=TRUE,echo=FALSE, fig.align='default', fig.height=3.5,fig.width=3.5----
+# base diagnostic
 plot(My.Mod,which=6)
 
+# ggDiagnostic plot
 D6 <- augment(My.Mod) %>% 
   ggplot(aes(x=.hat, y=.cooksd)) +
   geom_point() +
