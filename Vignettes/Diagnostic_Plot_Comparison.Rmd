@@ -1,10 +1,12 @@
 ---
-title: "Plot Comparison"
+title: " Diagnostic Plot Comparison"
 author: "JC"
 date: "9/9/2017"
-output:
-  pdf_document: default
-  html_document: default
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Diagnostic Plot Comparison}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=TRUE,echo=FALSE}

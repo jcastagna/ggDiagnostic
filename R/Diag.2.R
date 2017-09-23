@@ -1,7 +1,7 @@
 
 #' Diagnostic ggplots for models
-#' Standardised Residules v Fitted Values
-#' 
+#'
+#'
 #' Quick Model Diagnostics in GGplot.
 #' Using the Base version diagnostic plots as a template.
 #' 
@@ -19,21 +19,15 @@
 #' lm.1 <- lm(mpg ~ wt,data=mtcars)
 #' glm.1 <- glm(formula= vs ~ wt + disp, data=mtcars, family=binomial)
 #'
-#' Example as function
-#' Diag.1(lm.1)
-#' Diag.1(glm.1)
+#' Example as function()
+#' Diag.2(lm.1)
+#' Diag.2(glm.1)
 #'
 #' Example with magrittr pipe
-#' lm.1 %>% Diag.1()
-#' glm.1 %>% Diag.1()
+#' lm.1 %>% Diag.2()
+#' glm.1 %>% Diag.2()
 #' 
 #' Output shoud be a ggplot object in form of diagnostic plot.
-#' 
-#' Coresponding Base example
-#' plot(lm.1, which=1)
-#' plot(glm.1, which=1)
-#' 
-#' 
 #' 
 #' 
 
@@ -41,7 +35,7 @@
 #' @export
 #' 
 
-Diag.1 <- function(My.Model){
+Diag.2 <- function(My.Model){
   
 My.Mod=My.Model
 
@@ -50,16 +44,12 @@ print("Attempting to use broom then ggplot on model")
 # suppressWarnings()
 D.0  <- broom::augment(My.Mod)
 
-D.1 <- D.0 %>% 
-    ggplot(aes(x=.fitted,y=.std.resid)) +
-    geom_point() +
-    geom_smooth(se=FALSE,colour="red",size=.25) +
-    geom_hline(yintercept=0,linetype=4) +
-    geom_text(aes(label=ifelse((.std.resid>1*IQR(.std.resid)),.rownames,"")),
-            hjust=-0.1,vjust=-0.1,size=2.5) +
-    labs(title="Residuls vs Fitted",subtitle=My.Mod$call)
+D.2 <- D.0 %>% 
+  ggplot(aes(sample=.fitted)) +
+  stat_qq() +
+  labs(title="Normal QQ",subtitle=My.Mod$call)
   
-return(D.1)
+return(D.2)
 
 }
 
