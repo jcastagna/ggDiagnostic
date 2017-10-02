@@ -1,5 +1,5 @@
 
-#' CooksSD vs Leverage - Diagnostic ggplot for models
+#' CooksSD vs Leverage
 #'
 #'
 #' Quick Model Diagnostics in GGplot.
@@ -15,7 +15,7 @@
 #' 
 #' @examples
 #' 
-#' # Residuals vs Leverage
+#' # CooksSD vs Leverage
 #' # Test models
 #'
 #' lm.1 <- lm(mpg ~ wt,data=mtcars)

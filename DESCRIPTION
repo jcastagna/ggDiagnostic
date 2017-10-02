@@ -1,7 +1,7 @@
 Package: GGDiagnostics
 Version: 0.10
 Date: 2017-08-27
-Title: ggplot2 Diagnostic Plots
+Title: Diagnostic Plots in ggplot2
 Description: Quick Model Diagnostics in GGplot. Using the Base version diagnostic plots as a template.
 Author: Justin Castagna [aut, cre]
 Maintainer: Justin Castagna <justin.castagna@students.mq.edu.au>

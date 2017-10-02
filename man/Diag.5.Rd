@@ -2,7 +2,7 @@
 % Please edit documentation in R/Diag.5.R
 \name{Diag.5}
 \alias{Diag.5}
-\title{Residuals vs Leverage- Diagnostic ggplot for models}
+\title{Residuals vs Leverage}
 \usage{
 Diag.5(My.Model)
 }

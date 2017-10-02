@@ -1,5 +1,5 @@
 
-#' Residuals vs Leverage- Diagnostic ggplot for models
+#' Residuals vs Leverage
 #'
 #'
 #' Quick Model Diagnostics in GGplot.
