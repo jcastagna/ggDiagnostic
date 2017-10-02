@@ -2,7 +2,7 @@
 % Please edit documentation in R/Diag.6.R
 \name{Diag.6}
 \alias{Diag.6}
-\title{CooksSD vs Leverage - Diagnostic ggplot for models}
+\title{CooksSD vs Leverage}
 \usage{
 Diag.6(My.Model)
 }
@@ -19,7 +19,7 @@ Using the Base version diagnostic plots as a template.
 }
 \examples{
 
-# Residuals vs Leverage
+# CooksSD vs Leverage
 # Test models
 
 lm.1 <- lm(mpg ~ wt,data=mtcars)
