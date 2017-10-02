@@ -243,3 +243,16 @@ par(mfrow=c(2,3))
 plot(My.Mod,which=1:6)
 ```
 
+\newpage
+```{r ,eval=FALSE}
+# Extra Diagnostics to think about as extension
+# Note to re-engineer boot & car into ggdiagnostic
+library(boot)
+glm.diag.plots(Mod.D)
+glm.diag.plots(Mod.H)
+resdev=residuals(Mod.H,type="deviance")
+head(resdev)
+library(car)
+av.plots(Mod.H)
+```
+

@@ -219,5 +219,16 @@ D1  = augment(My.Mod) %>%
 
 D1
 
+#####
+
+# Extra Diagnostics to think about as extension
+# Note to re-engineer boot & car into ggd
+library(boot)
+glm.diag.plots(Mod.D)
+glm.diag.plots(Mod.H)
+resdev=residuals(Mod.H,type="deviance")
+head(resdev)
+library(car)
+av.plots(Mod.H)
 
 
